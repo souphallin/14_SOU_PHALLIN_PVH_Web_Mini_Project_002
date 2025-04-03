@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NavLinkComponent() {
   return (
     <>
-      <div className="flex items-center text-[#1E293B] font-medium text-xl ">
+      <div className="flex items-center text-[#1E293B] font-medium text-lg">
         <Link href="#">Workspace</Link>
         <div className="p-5">
             <svg
@@ -25,6 +25,7 @@ export default function NavLinkComponent() {
         </div>
         <Link href="#">HRD Design</Link>
       </div>
+      <div className="bg-gray-500 w-[200px] h-1 rounded-full"></div>
     </>
   );
 }

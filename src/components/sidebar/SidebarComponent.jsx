@@ -1,31 +1,103 @@
-import WorkflowConponent from "../workarea/WorkflowConponent";
-import SidebarAddedComponent from "./SidebarAddedComponent";
+"use client";
 
-export default function SidebarComponent(){
-    return<>
-        <div className="flex h-screen">
+import { useRef, useState } from "react";
+import SidebarAddedComponent from "./SidebarAddedComponent";
+import AddWorkspaceButton from "./add-workspace-button";
+import Favorite from "./favorite";
+
+export default function SidebarComponent({workspaces}) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const inputRef = useRef(null);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+      };
+      console.log("isModalOpen : ", isModalOpen)
+
+      const handleSave = () => {
+        const workspaceName = inputRef.current.value.trim();
+        if (workspaceName) {
+          console.log("New Workspace Name:", workspaceName);
+          closeModal(); // Close modal after save
+        }
+      };
+
+  return (
+    <>
+      <div className="flex max-h-[240px] overflow-auto">
         {/* Sidebar */}
         <aside className="w-[100%] shadow-md">
-            <div className="p-4 border-b">
-                <div className="flex items-center justify-between">
-                    <span className="ml-2 text-xl font-semibold text-[#94A3B8]">
-                    Workspace
-                    </span>
-                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.53 12H16.54" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M8.54004 12H12.35" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M12.54 16V8" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M2.54004 13.04V15C2.54004 20 4.54004 22 9.54004 22H15.54C20.54 22 22.54 20 22.54 15V9C22.54 4 20.54 2 15.54 2H9.54004C4.54004 2 2.54004 4 2.54004 9" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </div>
+          <div className="p-4 border-b">
+            <div className="flex items-center justify-between">
+              <span className="ml-2 text-xl font-semibold text-[#94A3B8]">
+                Workspace
+              </span>
+              <button onClick={() => setIsModalOpen(true)} className="cursor-pointer">
+                {/* AddWorkspaceButton */}
+                <AddWorkspaceButton  />
+              </button>
             </div>
-            <nav className="my-5 px-2">
-                <SidebarAddedComponent/>
-                {/* <WorkflowConponent/> */}
-            </nav>
-
+          </div>
+          <nav className="my-5 px-2">
+            <SidebarAddedComponent workspaces={workspaces} />
+            {/* <WorkflowComponent/> */}
+          </nav>
         </aside>
-        
+      </div>
+
+      <div className="flex max-h-[240px] overflow-auto mt-10">
+        {/* Sidebar */}
+        <aside className="w-[100%] shadow-md">
+          <div className="p-4 border-b">
+            <div className="flex items-center justify-between">
+              <span className="ml-2 text-xl font-semibold text-[#94A3B8]">
+                Favorite
+              </span>
+              <button className="cursor-pointer">
+                {/* AddWorkspaceButton */}
+                <Favorite/>
+              </button>
+            </div>
+          </div>
+          <nav className="my-5 px-2">
+            <SidebarAddedComponent />
+            {/* <WorkflowComponent/> */}
+          </nav>
+        </aside>
+      </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex z-50 items-center justify-center bg-black/50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
+            <h2 className="text-xl font-semibold mb-4">Add Workspace</h2>
+            
+            {/* Input Field */}
+            <input
+              type="text"
+              ref={inputRef} // Direct reference instead of state
+              placeholder="Enter workspace name"
+              className="w-full p-2 border rounded mb-4"
+            />
+            
+            {/* Buttons */}
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </div>
+      )}
     </>
+  );
 }

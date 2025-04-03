@@ -13,9 +13,9 @@ export async function LoginService({email, password}) {
     })
     const data = await res.json();
     
-    // if(data?.status != "OK"){
-    //     redirect("/login")
-    // }
+    if(data?.status != "OK"){
+        redirect("/login")
+    }
 
     return data;
 }

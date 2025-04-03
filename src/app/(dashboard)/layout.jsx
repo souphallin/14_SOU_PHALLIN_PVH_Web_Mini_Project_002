@@ -17,7 +17,7 @@ export default function MainPageLayout({ children }) {
           <div className="col-span-2 container mx-auto my-12 pl-15">
             <Logo />
           </div>
-          <div className="col-span-6 mx-10 flex items-center justify-between">
+          <div className="col-span-6 mx-10 flex items-center justify-between h-22 px-8 shadow-md">
             <div>
               <NavLinkComponent/>
             </div>
