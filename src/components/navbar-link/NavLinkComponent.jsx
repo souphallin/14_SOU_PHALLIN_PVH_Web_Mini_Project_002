@@ -25,7 +25,7 @@ export default function NavLinkComponent() {
         </div>
         <Link href="#">HRD Design</Link>
       </div>
-      <div className="bg-gray-500 w-[200px] h-1 rounded-full"></div>
+      <div className="bg-[#4379F2] w-[200px] h-1 rounded-full"></div>
     </>
   );
 }
