@@ -1,4 +1,4 @@
-export default function UserProfile(){
+export default function UserProfile({user}){
     return<>
         <div className="mt-auto">
             <div className="flex items-center">
@@ -15,8 +15,8 @@ export default function UserProfile(){
                 alt="User"
                 />
                 <div>
-                    <p className="text-lg font-medium text-[#1E293B]">Monster</p>
-                    <p className="text-md font-medium text-[#009990]">blackmonster@gmail.com</p>
+                    <p className="text-lg font-medium text-[#1E293B]">{user?.username}</p>
+                    <p className="text-md font-medium text-[#009990]">{user?.email}</p>
                 </div>
             </div>
         </div>

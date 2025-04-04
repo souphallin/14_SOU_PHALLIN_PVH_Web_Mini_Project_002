@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { signIn } from "../src/auth";
+import { error } from "console";
 
 export const LoginAction = async(_, formData) => {
 
@@ -10,6 +11,17 @@ export const LoginAction = async(_, formData) => {
     // }
     const email = formData.get("email")
     const password = formData.get("password");
+
+    if(!password    ){
+        return{
+            error: "Incorrect Password!!!"   
+        }
+    }
+    if(!email){
+        return{
+            error: "Incorrect Email!!"
+        }
+    }
 
     await signIn("credentials", {
         email, 
